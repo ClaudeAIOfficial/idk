@@ -646,3 +646,48 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     transform-origin: center;
   }
 }
+
+
+/* Opening stage sync, matched to the reference screen recording. */
+.rg-intro { --intro-title-scale: 1; }
+.rg-intro .rg-hero-caption {
+  transform: translate3d(-50%,calc(-50% + var(--intro-title-shift)),0) scale(var(--intro-title-scale));
+  transform-origin:center center;
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+}
+.rg-intro .rg-hero>picture {
+  will-change:opacity,transform;
+  backface-visibility:hidden;
+}
+.rg-intro .rg-hero::before {background:#1b2440}
+.rg-intro .rg-hero::after {
+  background:linear-gradient(180deg,
+    rgba(11,17,48,.04) 0%,
+    rgba(12,16,49,.11) 23%,
+    rgba(12,17,43,.43) 57%,
+    rgba(12,16,40,.83) 100%);
+}
+.rg-intro-gallery {
+  margin-top:44svh;
+  backface-visibility:hidden;
+}
+.rg-intro-gallery .rg-tile {
+  transition:transform 940ms cubic-bezier(.17,.77,.2,1),opacity 800ms cubic-bezier(.2,.7,.2,1);
+}
+.rg-intro-gallery .rg-tile.intro-unseen {
+  opacity:0;
+  transform:translate3d(0,85px,0);
+}
+.rg-intro-gallery .rg-tile.intro-visible {
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+@media (max-width:650px) {
+  .rg-intro-gallery {margin-top:36svh}
+}
+@media (prefers-reduced-motion:reduce) {
+  .rg-intro .rg-hero-caption {transform:translate3d(-50%,-50%,0);will-change:auto}
+  .rg-intro .rg-hero>picture {will-change:auto}
+  .rg-intro-gallery .rg-tile,.rg-intro-gallery .rg-tile.intro-unseen {transform:none;opacity:1;transition:none}
+}
