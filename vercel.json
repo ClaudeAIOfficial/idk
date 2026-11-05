@@ -17,6 +17,33 @@
           "value": "no-store, max-age=0, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/VI/launch-gallery",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/VI/launch-gallery",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/VI/launch-gallery",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/VI/:path*",
+      "destination": "/:path*"
     }
   ]
 }
