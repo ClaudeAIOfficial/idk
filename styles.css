@@ -802,3 +802,229 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     padding-top: 52px !important;
   }
 }
+
+
+/* Footer rebuild to match the official GTA VI gallery composition. */
+.rg-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 840px;
+  padding: 96px 28px 45px;
+  background: radial-gradient(ellipse at 13% 40%, #181a31 0%, #111022 54%, #0c0b19 100%);
+  color: #c9bee5;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.rg-footer-logo {
+  display: block;
+  width: 190px;
+  margin: 0 auto 38px;
+}
+.rg-footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.rg-newsletter {
+  width: min(1020px, 100%);
+  min-height: 115px;
+  margin: 0;
+  padding: 24px 55px;
+  display: grid;
+  grid-template-columns: 43% minmax(0, 1fr);
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(208,196,246,.28);
+  border-radius: 999px;
+  text-align: left;
+  color: #fff;
+}
+.rg-newsletter-title {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: clamp(16px, 1.45vw, 20px);
+  font-weight: 800;
+  letter-spacing: -.027em;
+  white-space: nowrap;
+}
+.rockstar-mini {
+  flex: 0 0 29px;
+  position: relative;
+  display: inline-flex;
+  width: 29px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-weight: 900;
+}
+.rockstar-r {
+  display: block;
+  font-size: 31px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1;
+}
+.rockstar-star {
+  position: absolute;
+  right: -7px;
+  bottom: -1px;
+  font-size: 17px;
+  line-height: 1;
+}
+.rg-newsletter-desc {
+  display: block;
+  font-size: clamp(15px, 1.22vw, 18px);
+  line-height: 1.58;
+  font-weight: 550;
+  letter-spacing: -.025em;
+  color: #fff;
+}
+.rg-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 42px);
+  margin: 53px auto 32px;
+}
+.rg-social a {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 30px;
+  color: #c6b8e6;
+  transition: color .2s ease, transform .2s ease;
+}
+.rg-social a:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+.rg-social svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  stroke: none;
+  fill: currentColor;
+}
+.rg-social a[aria-label="Instagram"] svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.rg-legal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px 26px;
+  margin: 0 auto 40px;
+  color: #c9bfe6;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+.rg-legal a {
+  white-space: nowrap;
+}
+.rg-rating {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 19px;
+  margin: 0 auto;
+  color: #fff;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.48;
+  font-weight: 500;
+}
+.rg-rating-label {
+  box-sizing: border-box;
+  flex: 0 0 47px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 47px;
+  height: 72px;
+  padding: 0;
+  border: 2px solid white;
+  background: white;
+  color: #000;
+}
+.rg-rating-label .rating-heading {
+  padding: 1px 0 0;
+  font: 800 6.5px/1.15 Arial, sans-serif;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+}
+.rg-rating-label b {
+  display: block;
+  font: 1000 48px/.91 "Arial Black", Arial, sans-serif;
+  letter-spacing: -.07em;
+  text-align: center;
+}
+.rg-rating-label .rating-agency {
+  display: block;
+  width: 100%;
+  height: 11px;
+  background: #000;
+  color: #fff;
+  font: 900 9px/11px Arial, sans-serif;
+  text-align: center;
+}
+.rg-rating-details {
+  min-width: 380px;
+}
+.rg-rating-text {
+  display: block;
+  padding: 0 0 16px;
+}
+.rg-rating-extra {
+  display: block;
+  border-top: 1px solid rgba(213,204,232,.15);
+  padding: 14px 0 0;
+}
+.rg-fan-note {
+  margin: 100px 0 0;
+  max-width: 800px;
+  color: #a6a0b9;
+  font-size: 11px;
+  line-height: 1.5;
+  opacity: .55;
+}
+@media (max-width: 900px) {
+  .rg-footer {min-height: 800px; padding-top: 85px;}
+  .rg-footer-logo {width: 168px; margin-bottom: 35px;}
+  .rg-newsletter {padding: 22px 30px; grid-template-columns: 46% 54%; gap: 10px;}
+  .rg-newsletter-title {font-size: 15px;gap: 12px;}
+  .rg-newsletter-desc {font-size: 15px;}
+  .rg-social {gap: 27px;}
+  .rg-legal {font-size: 13px;gap: 14px 22px;}
+  .rg-rating {font-size: 14px;}
+}
+@media (max-width: 600px) {
+  .rg-footer {min-height: 0; padding: 75px 20px 50px;}
+  .rg-footer-logo {width: 150px; margin-bottom: 29px;}
+  .rg-newsletter {min-height: 0; grid-template-columns: 1fr; gap: 15px; padding: 25px 22px; border-radius: 30px; text-align: center;}
+  .rg-newsletter-title {justify-content: center;font-size: 13px;gap: 14px;}
+  .rg-newsletter-desc {font-size: 13px;line-height: 1.5;letter-spacing: 0;}
+  .rg-newsletter-desc br {display: none;}
+  .rg-social {gap: 17px 25px; margin: 39px 0 32px; flex-wrap: wrap;}
+  .rg-social a {width: 24px;height: 26px;}
+  .rg-social svg {width: 22px;height: 22px;}
+  .rg-legal {font-size: 12px;gap: 12px 17px; margin-bottom: 34px;}
+  .rg-rating {font-size: 12px;line-height: 1.45;gap: 14px;}
+  .rg-rating-label {flex-basis: 42px;width: 42px;height: 65px;}
+  .rg-rating-label b {font-size: 43px;}
+  .rg-rating-details {min-width: 0;max-width: 315px;}
+  .rg-rating-text {padding-bottom: 12px;}
+  .rg-rating-extra {padding-top: 12px;}
+  .rg-fan-note {margin-top: 66px;font-size: 10px;}
+}
