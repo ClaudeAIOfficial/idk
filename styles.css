@@ -240,3 +240,17 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     will-change:auto;
   }
 }
+
+/* Hero must remain image-only, consistent with the original launch gallery. */
+.rg-hero .hero-inner,
+.rg-hero .hero-content,
+.rg-hero .hero-title,
+.rg-hero .hero-subtitle,
+.rg-hero .scroll-indicator,
+.rg-hero h1,
+.rg-hero h2,
+.hero .hero-inner,
+.hero .hero-under,
+.hero .scroll-indicator {display:none!important}
+.rg-hero>picture {position:absolute;inset:0;z-index:0}
+.rg-hero>picture img {width:100%;height:100%;object-fit:cover}
