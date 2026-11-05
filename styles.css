@@ -791,3 +791,14 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     right: calc(var(--viewer-image-inset-right, 0px) + 16px);
   }
 }
+
+
+/* Separate the newly added Ocean Drive beach-club photo from the preceding bridge shot. */
+.rg-series.rg-last {
+  padding-top: clamp(76px, 7vw, 140px) !important;
+}
+@media (max-width: 600px) {
+  .rg-series.rg-last {
+    padding-top: 52px !important;
+  }
+}
