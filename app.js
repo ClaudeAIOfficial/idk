@@ -13,7 +13,7 @@ const plans=[
 {theme:5,full:28,kind:"generic-collage",left:[[29,"square"],[31,"landscape"]],right:[[30,"portrait"]],focus:32},
 {theme:6,full:33,kind:"generic-collage",left:[[34,"square"],[36,"landscape"]],right:[[35,"portrait"]],focus:37},
 {theme:6,full:38},
-{theme:6,full:39,last:true}
+{theme:6,focus:39,last:true}
 ];
 const zoomMarkup='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6 M20 4l-8 8 M10 20H4v-6 M4 20l8-8"/></svg>';
 const $=id=>document.getElementById(id);
