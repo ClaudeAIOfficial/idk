@@ -2,6 +2,8 @@ const screenshots = [{"name":"Jason_and_Lucia_14_Mobile.17zv0lmevzbgs.jpg","labe
 
 const media="https://www.rockstargames.com/VI/_next/static/media/";
 const photos=screenshots.map((p,i)=>({id:i,label:p.label,url:"assets/gallery/"+String(i).padStart(2,"0")+".jpg",remote:p.remote}));
+// Newest addition: user-supplied beach club scene (no visible label or badge).
+photos.push({id:39,label:"Ocean Drive Beach Club",url:"assets/gallery/39.png",remote:"https://d2ol7oe51mr4n9.cloudfront.net/user_3DFeZk0LqgiFcue7STVOyiCo13m/11ff3196-748f-49bb-a5ee-37f75834ce6e.png"});
 const plans=[
 {theme:0,kind:"first-collage",left:[[1,"square"],[2,"square"]],right:[[3,"portrait"]],focus:4},
 {theme:1,full:5,kind:"offset-collage",left:[[6,"square"],[7,"portrait"]],right:[[8,"square"]],focus:9},
@@ -10,7 +12,8 @@ const plans=[
 {theme:4,full:23,kind:"generic-collage",left:[[24,"square"],[26,"landscape"]],right:[[25,"portrait"]],focus:27},
 {theme:5,full:28,kind:"generic-collage",left:[[29,"square"],[31,"landscape"]],right:[[30,"portrait"]],focus:32},
 {theme:6,full:33,kind:"generic-collage",left:[[34,"square"],[36,"landscape"]],right:[[35,"portrait"]],focus:37},
-{theme:6,full:38,last:true}
+{theme:6,full:38},
+{theme:6,full:39,last:true}
 ];
 const zoomMarkup='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6 M20 4l-8 8 M10 20H4v-6 M4 20l8-8"/></svg>';
 const $=id=>document.getElementById(id);
