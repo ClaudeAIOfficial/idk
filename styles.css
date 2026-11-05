@@ -483,3 +483,80 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     margin-top: 18px;
   }
 }
+
+
+/* Header identity matched against the original Rockstar screenshot. 
+   Font is referenced from Rockstar's public media endpoint, not bundled. */
+@font-face {
+  font-family: "Rockstar Helvetica Now";
+  src: url("https://www.rockstargames.com/VI/_next/static/media/HelveticaNowTextBold.09zi9h5iikqkk.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+.rg-header .rg-brand {
+  display: inline-flex;
+  gap: 0;
+  align-items: center;
+  color: #a2e5e6;
+  text-decoration: none;
+  letter-spacing: normal;
+  font-family: "Rockstar Helvetica Now", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+}
+.rg-header .rg-vi-logo {
+  display: block;
+  width: 46px;
+  height: 35px;
+  flex: 0 0 46px;
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+}
+.rg-header .rg-brand-sep {
+  align-self: center;
+  display: block;
+  width: 2px;
+  height: 33px;
+  flex: 0 0 2px;
+  margin: 0 17px 0 17px;
+  background-color: #85e3e1;
+}
+.rg-header .rg-brand-name {
+  color: #a2e5e6;
+  padding: 0;
+  margin: 0;
+  font-family: "Rockstar Helvetica Now", "Helvetica Neue", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.037em;
+  line-height: 1;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .rg-header .rg-vi-logo {
+    width: 41px;
+    height: 31px;
+    flex-basis: 41px;
+  }
+  .rg-header .rg-brand-sep {
+    height: 29px;
+    margin-inline: 12px;
+  }
+  .rg-header .rg-brand-name {
+    font-size: clamp(14px, 2.35vw, 19px);
+  }
+}
+@media (max-width: 600px) {
+  .rg-header .rg-vi-logo {
+    width: 33px;
+    height: 25px;
+    flex-basis: 33px;
+  }
+  .rg-header .rg-brand-sep {
+    height: 23px;
+    margin-inline: 9px;
+    width: 1px;
+    flex-basis: 1px;
+  }
+  .rg-header .rg-brand-name {font-size: 14px;letter-spacing: -.02em}
+}
