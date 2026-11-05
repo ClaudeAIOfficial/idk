@@ -16,6 +16,7 @@ items = json.loads(MATCH.group(1))
 images = [("assets/gallery/%02d.jpg" % i, item["remote"]) for i,item in enumerate(items)]
 base = "https://www.rockstargames.com/VI/_next/static/media/"
 images += [
+  ("assets/gallery/39.png", "https://d2ol7oe51mr4n9.cloudfront.net/user_3DFeZk0LqgiFcue7STVOyiCo13m/11ff3196-748f-49bb-a5ee-37f75834ce6e.png"),
   ("assets/hero.jpg", base+"Jason_and_Lucia_14.10e7v.06pcm_t.jpg"),
   ("assets/media.jpg", base+"mediaDesktop.11iioep6d3wsf.jpg"),
   ("assets/places.jpg", base+"onlyInLeonidaDesktop.15y2n40f3axwo.jpg"),
