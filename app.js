@@ -87,7 +87,10 @@ function step(dir) {
 }
 // No lightbox controls: tap/click anywhere to close, Escape to exit,
 // keyboard left/right and touch swipes still switch screenshots.
-viewer.addEventListener("click", closeViewer);
+let lastSwipe = 0;
+viewer.addEventListener("click", () => {
+  if (Date.now() - lastSwipe > 450) closeViewer();
+});
 let startX = null;
 viewer.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
@@ -96,18 +99,11 @@ viewer.addEventListener("touchend", e => {
   if (startX === null) return;
   const distance = e.changedTouches[0].clientX - startX;
   if (Math.abs(distance) > 45) {
+    lastSwipe = Date.now();
     step(distance < 0 ? 1 : -1);
-    // Prevent a swipe's synthetic click from closing the image.
-    viewer.dataset.swiped = "true";
   }
   startX = null;
 }, {passive:true});
-viewer.addEventListener("click", e => {
-  if (viewer.dataset.swiped === "true") {
-    delete viewer.dataset.swiped;
-    e.stopImmediatePropagation();
-  }
-}, true);
 const toggle=$("menu-toggle"),panel=$("menu-panel"),shade=$("menu-shade");
 function menu(open){
  toggle.classList.toggle("active",open);panel.classList.toggle("is-open",open);shade.classList.toggle("is-open",open);
