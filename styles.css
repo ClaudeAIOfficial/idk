@@ -751,3 +751,43 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
   .viewer {transition: none !important;}
   .viewer-opening-image {animation: none !important;}
 }
+
+
+/* Circular close control positioned at the upper-right edge of the displayed image. */
+.viewer .viewer-close-pill {
+  position: absolute;
+  z-index: 220;
+  top: calc(var(--viewer-image-inset-top, 0px) - 29px);
+  right: calc(var(--viewer-image-inset-right, 0px) + 32px);
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #2b2b5a;
+  color: #adb7ea;
+  box-shadow: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .22s ease, background-color .18s ease;
+}
+.viewer.is-visible .viewer-close-pill {
+  opacity: 1;
+}
+.viewer .viewer-close-pill:hover {
+  background: #383b74;
+}
+.viewer .viewer-close-pill svg {
+  width: 19px;
+  height: 19px;
+}
+@media (max-width: 600px) {
+  .viewer .viewer-close-pill {
+    width: 48px;
+    height: 48px;
+    top: calc(var(--viewer-image-inset-top, 0px) - 24px);
+    right: calc(var(--viewer-image-inset-right, 0px) + 16px);
+  }
+}
