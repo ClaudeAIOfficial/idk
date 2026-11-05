@@ -112,7 +112,8 @@
     for (const img of active) {
       const rect = img.parentElement.getBoundingClientRect();
       const distance = rect.top + rect.height / 2 - half;
-      const travel = Math.min(42, Math.max(-42, -distance * 0.055));
+      const edgeSafe = Math.min(42, rect.height * 0.039);
+      const travel = Math.min(edgeSafe, Math.max(-edgeSafe, -distance * 0.055));
       img.style.setProperty("--rg-parallax", travel.toFixed(2) + "px");
     }
   }
