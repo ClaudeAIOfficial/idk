@@ -211,3 +211,32 @@ body{background:#14182d;color:#fff;overflow-x:hidden}
 .rg-rating-label{width:36px;min-width:36px}
 .rg-fan-note{margin-top:45px}
 }
+
+
+/* Glass-smooth inertial scrolling with subtle camera movement. */
+html.lenis, html.lenis body { height: auto; }
+html.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+html.lenis.lenis-smooth iframe { pointer-events: none; }
+html.glide-active, html.lenis {scroll-behavior:auto !important}
+.rg-main .rg-tile img {
+  --rg-parallax: 0px;
+  --rg-scale: 1.09;
+  transform: translate3d(0,var(--rg-parallax),0) scale(var(--rg-scale));
+  transform-origin:center;
+  transition:filter .25s ease;
+  will-change:transform;
+  backface-visibility:hidden;
+}
+.rg-main .rg-tile:hover img { --rg-scale: 1.12; }
+@media (hover:none), (pointer:coarse) {
+  .rg-main .rg-tile img {will-change:auto;transform:none}
+  .rg-main .rg-tile:hover img {transform:none}
+}
+@media (prefers-reduced-motion: reduce) {
+  html {scroll-behavior:auto !important}
+  .rg-main .rg-tile img, .rg-main .rg-tile:hover img {
+    transform:none!important;
+    transition:none!important;
+    will-change:auto;
+  }
+}
