@@ -691,3 +691,49 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
   .rg-intro .rg-hero>picture {will-change:auto}
   .rg-intro-gallery .rg-tile,.rg-intro-gallery .rg-tile.intro-unseen {transform:none;opacity:1;transition:none}
 }
+
+
+/* Image-only fullscreen preview: no bars, labels, controls, or framing. */
+.viewer {
+  display: flex !important;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: none !important;
+  background: #050507 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  cursor: zoom-out;
+  touch-action: pan-y;
+}
+.viewer img#viewer-image {
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none !important;
+}
+.viewer:focus,
+.viewer:focus-visible {outline: none}
+@media (max-width: 700px) {
+  .viewer img#viewer-image {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+  }
+}
