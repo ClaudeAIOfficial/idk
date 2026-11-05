@@ -254,3 +254,130 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
 .hero .scroll-indicator {display:none!important}
 .rg-hero>picture {position:absolute;inset:0;z-index:0}
 .rg-hero>picture img {width:100%;height:100%;object-fit:cover}
+
+
+/* Scroll-stage hero: the original page reveals its title only after the visitor scrolls. */
+.rg-intro {
+  position: relative;
+  isolation: isolate;
+  background: #1b2340;
+  --intro-title-opacity: 0;
+  --intro-title-shift: 35px;
+  --intro-image-opacity: 1;
+  --intro-darkness: 0;
+  --intro-image-scale: 1;
+}
+.rg-intro .rg-hero {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 540px;
+  background: radial-gradient(ellipse at 20% 45%,#223456,#18203b 65%,#16172d);
+  overflow: hidden;
+  z-index: 0;
+}
+.rg-intro .rg-hero>picture {
+  position: absolute;
+  inset: 0;
+  opacity: var(--intro-image-opacity);
+  transform: scale(var(--intro-image-scale));
+  transform-origin: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+.rg-intro .rg-hero::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: #1c2847;
+  opacity: var(--intro-darkness);
+  pointer-events: none;
+}
+.rg-intro .rg-hero::after {
+  z-index: 2;
+  background: linear-gradient(180deg,transparent 8%,rgba(12,16,33,.08) 43%,rgba(12,15,33,.65) 100%);
+  opacity: calc(1 - var(--intro-darkness));
+}
+.rg-hero-caption {
+  position: absolute;
+  z-index: 3;
+  top: 51%;
+  left: 50%;
+  width: min(860px, 90%);
+  transform: translate3d(-50%,calc(-50% + var(--intro-title-shift)),0);
+  opacity: var(--intro-title-opacity);
+  pointer-events: none;
+  text-align: center;
+  color: #a4ffdb;
+  will-change: transform,opacity;
+}
+.rg-hero-caption h1 {
+  display: block !important;
+  margin: 0;
+  font-size: clamp(43px,5.35vw,94px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.065em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #a4ffdb;
+  text-shadow: 0 1px 18px rgba(10,12,36,.12);
+}
+.rg-hero-caption p {
+  margin: 22px 0 0;
+  color: #b9f3ed;
+  font-size: clamp(13px,1.25vw,21px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.035em;
+}
+.rg-hero-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 26px;
+  margin-top: 29px;
+  color: #d5ff97;
+}
+.rg-hero-chevron svg {width: 32px; height: 32px}
+.rg-intro-gallery {
+  position: relative;
+  z-index: 4;
+  margin-top: 44svh;
+  background: transparent;
+  padding: 0;
+}
+.rg-intro-gallery .rg-series.tone-0 {
+  background: transparent !important;
+  overflow: visible;
+}
+.rg-intro-gallery .rg-collage.first-collage {
+  padding-top: 0;
+}
+.rg-intro-gallery .rg-tile {
+  transition: transform 850ms cubic-bezier(.17,.72,.24,1), opacity 800ms ease;
+}
+.rg-intro-gallery .rg-tile.intro-unseen {
+  transform: translate3d(0,70px,0);
+  opacity: 0;
+}
+.rg-intro-gallery .rg-tile.intro-visible {
+  transform: translate3d(0,0,0);
+  opacity: 1;
+}
+@media(max-width:650px) {
+  .rg-intro .rg-hero {min-height:450px}
+  .rg-hero-caption {top:48%;width:calc(100% - 30px)}
+  .rg-hero-caption h1 {font-size:clamp(42px,10.5vw,67px)}
+  .rg-hero-caption p {font-size:14px;margin-top:16px}
+  .rg-hero-chevron {margin-top:19px}
+  .rg-intro-gallery {margin-top:36svh}
+  .rg-intro-gallery .rg-collage.first-collage {padding-top:16px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .rg-intro-gallery .rg-tile {transition:none !important}
+  .rg-intro-gallery .rg-tile.intro-unseen {transform:none;opacity:1}
+  .rg-hero-caption {display:none !important}
+}
