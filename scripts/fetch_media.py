@@ -19,7 +19,9 @@ images += [
   ("assets/hero.jpg", base+"Jason_and_Lucia_14.10e7v.06pcm_t.jpg"),
   ("assets/media.jpg", base+"mediaDesktop.11iioep6d3wsf.jpg"),
   ("assets/places.jpg", base+"onlyInLeonidaDesktop.15y2n40f3axwo.jpg"),
-  ("assets/vi.png", base+"vi.0hxa9-pf214xe.png"),
+  ("assets/vi.png", "https://media-rockstargames-com.akamaized.net/tina-uploads/posts/3928aaa9471o3a/7ff0c4b640e5979c692e869a2c01781c596d30bd.png"),
+  ("assets/media-mobile.jpg", base+"mediaMobile.0p_yfitphljim.jpg"),
+  ("assets/places-mobile.jpg", base+"onlyInLeonidaMobile.0mupfnk-x6x-r.jpg"),
 ]
 headers = {"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36",
            "Referer":"https://www.rockstargames.com/VI/launch-gallery",
