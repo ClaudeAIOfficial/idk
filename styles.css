@@ -737,3 +737,17 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
     max-height: none;
   }
 }
+
+
+/* Thumbnail-to-fullscreen opening transition. No visible viewer controls. */
+.viewer {
+  transition: opacity 400ms cubic-bezier(.22,1,.36,1), visibility 400ms !important;
+}
+.viewer-opening-image {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewer {transition: none !important;}
+  .viewer-opening-image {animation: none !important;}
+}
