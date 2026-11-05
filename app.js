@@ -23,7 +23,7 @@ function photo(index,shape){
  img.src=p.url;img.alt=p.label+" GTA VI screenshot";img.loading=index<5?"eager":"lazy";img.decoding="async";
  img.onerror=()=>{if(!img.dataset.remote){img.dataset.remote="1";img.src=p.remote+(p.remote.includes("?")?"&":"?")+"akim=1&imdensity=1&imwidth=1280";}else{img.onerror=null;img.style.opacity=".15";}};
  z.className="rg-zoom";z.innerHTML=zoomMarkup;
- b.append(img,z);b.addEventListener("click",()=>openViewer(index));return b;
+ b.append(img,z);b.addEventListener("click",()=>openViewer(index,b));return b;
 }
 function column(items,side){
  const c=document.createElement("div");c.className="rg-stack rg-stack--"+side;
@@ -67,21 +67,84 @@ function show(index) {
     }
   };
 }
-function openViewer(index) {
+// Smooth shared-image opening: expand the clicked tile into the fullscreen image.
+let openingAnimation = null;
+let openingClone = null;
+function finishOpening() {
+  if (openingAnimation) {
+    const animation = openingAnimation;
+    openingAnimation = null;
+    animation.onfinish = null;
+    animation.oncancel = null;
+    animation.cancel();
+  }
+  if (openingClone) {
+    openingClone.remove();
+    openingClone = null;
+  }
+  $("viewer-image").style.visibility = "";
+}
+function animateOpening(source) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !source || !Element.prototype.animate) return;
+  const sourceImage = source.querySelector("img");
+  if (!sourceImage || !sourceImage.complete || !sourceImage.naturalWidth) return;
+  const rect = source.getBoundingClientRect();
+  const naturalW = sourceImage.naturalWidth;
+  const naturalH = sourceImage.naturalHeight;
+  if (rect.width < 1 || rect.height < 1 || naturalW < 1 || naturalH < 1) return;
+
+  // The fullscreen image uses object-fit: contain, so animate to its actual image bounds.
+  const scale = Math.min(innerWidth / naturalW, innerHeight / naturalH);
+  const width = naturalW * scale;
+  const height = naturalH * scale;
+  const left = (innerWidth - width) / 2;
+  const top = (innerHeight - height) / 2;
+
+  const clone = sourceImage.cloneNode(false);
+  clone.removeAttribute("id");
+  clone.alt = "";
+  clone.setAttribute("aria-hidden", "true");
+  clone.className = "viewer-opening-image";
+  clone.style.cssText = "position:fixed;z-index:210;pointer-events:none;object-fit:cover;max-width:none;max-height:none;transform:none;border:0;border-radius:0;box-shadow:none;will-change:left,top,width,height;";
+  clone.style.left = rect.left + "px";
+  clone.style.top = rect.top + "px";
+  clone.style.width = rect.width + "px";
+  clone.style.height = rect.height + "px";
+  document.body.appendChild(clone);
+  openingClone = clone;
+  $("viewer-image").style.visibility = "hidden";
+
+  openingAnimation = clone.animate([
+    {left:rect.left+"px",top:rect.top+"px",width:rect.width+"px",height:rect.height+"px"},
+    {left:left+"px",top:top+"px",width:width+"px",height:height+"px"}
+  ],{
+    duration:590,
+    easing:"cubic-bezier(0.22, 1, 0.36, 1)",
+    fill:"forwards"
+  });
+  openingAnimation.onfinish = finishOpening;
+  openingAnimation.oncancel = finishOpening;
+}
+function openViewer(index,source) {
+  finishOpening();
   priorFocus = document.activeElement;
   show(index);
   viewer.classList.add("is-visible");
   viewer.setAttribute("aria-hidden", "false");
   document.body.classList.add("is-locked");
   viewer.focus({preventScroll:true});
+  animateOpening(source);
 }
 function closeViewer() {
+  finishOpening();
   viewer.classList.remove("is-visible");
   viewer.setAttribute("aria-hidden", "true");
   document.body.classList.remove("is-locked");
   if (priorFocus && priorFocus.focus) priorFocus.focus({preventScroll:true});
 }
 function step(dir) {
+  finishOpening();
   const n = photos.length - 1;
   show(1 + ((current - 1 + dir + n) % n));
 }
