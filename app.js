@@ -60,7 +60,7 @@ function showViewerImage(index) {
   viewerImage.alt = shot.label + ' screenshot';
   viewerCounter.textContent = String(activeIndex + 1).padStart(2,'0') + ' / ' + String(count).padStart(2,'0');
   viewerCaption.textContent = shot.label.toUpperCase();
-  viewerOpen.href = shot.local ? shot.src : shot.remote;
+  viewerOpen.href = shot.shot.src;
   viewerImage.onerror = () => {
     if (viewerImage.dataset.fallbackDone) return;
     viewerImage.dataset.fallbackDone = 'true';
