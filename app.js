@@ -49,34 +49,65 @@ for(const p of plans){
  }
  $("rg-sections").append(section);
 }
-function show(index){
- current=index;const p=photos[index];
- delete $("viewer-image").dataset.fallback;
- $("viewer-image").src=p.url;$("viewer-image").style.opacity="1";
- $("viewer-image").onerror=()=>{const img=$("viewer-image");if(!img.dataset.fallback){img.dataset.fallback="1";img.src=p.remote+"?akim=1&imdensity=1&imwidth=1600";}else{img.onerror=null;img.style.opacity=".2";}};
- $("viewer-image").alt=p.label;
- $("viewer-counter").textContent=String(index).padStart(2,"0")+" / "+String(photos.length-1).padStart(2,"0");
- $("viewer-caption").textContent=p.label.toUpperCase();$("viewer-open").href=p.url;
+function show(index) {
+  current = index;
+  const shot = photos[index];
+  const img = $("viewer-image");
+  delete img.dataset.fallback;
+  img.style.opacity = "1";
+  img.src = shot.url;
+  img.alt = shot.label;
+  img.onerror = () => {
+    if (!img.dataset.fallback) {
+      img.dataset.fallback = "1";
+      img.src = shot.remote + "?akim=1&imdensity=1&imwidth=1600";
+    } else {
+      img.onerror = null;
+      img.style.opacity = ".2";
+    }
+  };
 }
-function openViewer(index){
- priorFocus=document.activeElement;show(index);viewer.classList.add("is-visible");
- viewer.setAttribute("aria-hidden","false");document.body.classList.add("is-locked");$("viewer-close").focus();
+function openViewer(index) {
+  priorFocus = document.activeElement;
+  show(index);
+  viewer.classList.add("is-visible");
+  viewer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("is-locked");
+  viewer.focus({preventScroll:true});
 }
-function closeViewer(){
- viewer.classList.remove("is-visible");viewer.setAttribute("aria-hidden","true");
- document.body.classList.remove("is-locked");if(priorFocus)priorFocus.focus();
+function closeViewer() {
+  viewer.classList.remove("is-visible");
+  viewer.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("is-locked");
+  if (priorFocus && priorFocus.focus) priorFocus.focus({preventScroll:true});
 }
-function step(dir){const n=photos.length-1;show(1+(current-1+dir+n)%n);}
-$("viewer-close").addEventListener("click",closeViewer);
-$("viewer-prev").addEventListener("click",()=>step(-1));
-$("viewer-next").addEventListener("click",()=>step(1));
-viewer.addEventListener("click",e=>{if(e.target===viewer)closeViewer()});
-let startX=null;
-viewer.addEventListener("touchstart",e=>startX=e.touches[0].clientX,{passive:true});
-viewer.addEventListener("touchend",e=>{
- if(startX===null)return;let d=e.changedTouches[0].clientX-startX;
- if(Math.abs(d)>45)step(d<0?1:-1);startX=null;
-},{passive:true});
+function step(dir) {
+  const n = photos.length - 1;
+  show(1 + ((current - 1 + dir + n) % n));
+}
+// No lightbox controls: tap/click anywhere to close, Escape to exit,
+// keyboard left/right and touch swipes still switch screenshots.
+viewer.addEventListener("click", closeViewer);
+let startX = null;
+viewer.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+}, {passive:true});
+viewer.addEventListener("touchend", e => {
+  if (startX === null) return;
+  const distance = e.changedTouches[0].clientX - startX;
+  if (Math.abs(distance) > 45) {
+    step(distance < 0 ? 1 : -1);
+    // Prevent a swipe's synthetic click from closing the image.
+    viewer.dataset.swiped = "true";
+  }
+  startX = null;
+}, {passive:true});
+viewer.addEventListener("click", e => {
+  if (viewer.dataset.swiped === "true") {
+    delete viewer.dataset.swiped;
+    e.stopImmediatePropagation();
+  }
+}, true);
 const toggle=$("menu-toggle"),panel=$("menu-panel"),shade=$("menu-shade");
 function menu(open){
  toggle.classList.toggle("active",open);panel.classList.toggle("is-open",open);shade.classList.toggle("is-open",open);
