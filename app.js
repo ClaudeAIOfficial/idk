@@ -49,13 +49,29 @@ for(const p of plans){
  }
  $("rg-sections").append(section);
 }
+function positionViewerClose() {
+  const img = $("viewer-image");
+  if (!img.naturalWidth || !img.naturalHeight) return;
+  const w = viewer.clientWidth || window.innerWidth;
+  const h = viewer.clientHeight || window.innerHeight;
+  const scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
+  const displayedW = img.naturalWidth * scale;
+  const displayedH = img.naturalHeight * scale;
+  viewer.style.setProperty("--viewer-image-inset-top", Math.max(0, (h - displayedH) / 2) + "px");
+  viewer.style.setProperty("--viewer-image-inset-right", Math.max(0, (w - displayedW) / 2) + "px");
+}
+window.addEventListener("resize", positionViewerClose, {passive:true});
 function show(index) {
   current = index;
   const shot = photos[index];
   const img = $("viewer-image");
   delete img.dataset.fallback;
   img.style.opacity = "1";
+  viewer.style.setProperty("--viewer-image-inset-top", "0px");
+  viewer.style.setProperty("--viewer-image-inset-right", "0px");
+  img.onload = positionViewerClose;
   img.src = shot.url;
+  if (img.complete && img.naturalWidth) positionViewerClose();
   img.alt = shot.label;
   img.onerror = () => {
     if (!img.dataset.fallback) {
@@ -153,6 +169,10 @@ function step(dir) {
 let lastSwipe = 0;
 viewer.addEventListener("click", () => {
   if (Date.now() - lastSwipe > 450) closeViewer();
+});
+$("viewer-close-pill").addEventListener("click", event => {
+  event.stopPropagation();
+  closeViewer();
 });
 let startX = null;
 viewer.addEventListener("touchstart", e => {
