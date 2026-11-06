@@ -793,15 +793,6 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
 }
 
 
-/* Separate the newly added Ocean Drive beach-club photo from the preceding bridge shot. */
-.rg-series.rg-last {
-  padding-top: clamp(76px, 7vw, 140px) !important;
-}
-@media (max-width: 600px) {
-  .rg-series.rg-last {
-    padding-top: 52px !important;
-  }
-}
 
 
 /* Footer rebuild to match the official GTA VI gallery composition. */
