@@ -1038,58 +1038,46 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
   letter-spacing: .09em;
   line-height: 1;
 }
-.rg-first-portrait {
-  display: flex;
-  justify-content: center;
+/* Asymmetric opening fan-art pair, echoing the original two-column screenshot rhythm. */
+.rg-fan-duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.13fr) minmax(0, 1fr);
+  align-items: start;
+  column-gap: clamp(13px, 1.35vw, 27px);
   width: 100%;
-  padding: clamp(45px, 7vw, 110px) 20px clamp(100px, 10vw, 170px);
+  padding: clamp(46px, 5.5vw, 100px) 0 clamp(120px, 11vw, 210px);
 }
-.rg-first-portrait .rg-tile {
+.rg-fan-duo-left,
+.rg-fan-duo-right {min-width:0}
+.rg-fan-duo-left {padding-top: clamp(0px, 1.5vw, 24px)}
+.rg-fan-duo-right {padding-top: clamp(30px, 3vw, 55px)}
+.rg-fan-duo .rg-tile {
   display: block;
-  flex: 0 0 auto;
-  width: min(570px, 41vw);
-  aspect-ratio: 9 / 16;
-  border: 1px solid rgba(209,214,212,.65);
-  margin: 0 auto;
-}
-.rg-first-portrait .rg-tile img {object-fit: cover;}
-@media (max-width: 900px) {
-  .rg-header .rg-fan-label {font-size: 10px;margin-left: 10px;padding: 5px 6px;}
-  .rg-first-portrait .rg-tile {width: min(510px, 63vw);}
-}
-@media (max-width: 600px) {
-  .rg-header .rg-fan-label {
-    position: absolute;
-    top: 68px;
-    left: 18px;
-    margin-left: 0;
-    font-size: 9px;
-    padding: 5px 7px;
-  }
-  .rg-first-portrait {padding: 38px 12px 70px;}
-  .rg-first-portrait .rg-tile {width: min(88vw, 430px);}
-}
-
-
-/* New Lucia-and-cat community artwork follows the DJ portrait as a centered landscape image. */
-.rg-first-landscape {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0 20px clamp(95px, 11vw, 185px);
-}
-.rg-first-landscape .rg-tile {
-  width: min(1175px, 70vw);
-  flex: 0 0 auto;
-  aspect-ratio: 16 / 9;
+  margin: 0;
   border: 1px solid rgba(210, 217, 209, .65);
-  margin: 0 auto;
 }
-.rg-first-landscape .rg-tile img {object-fit: cover;}
+.rg-fan-duo-left .rg-tile {aspect-ratio: 1 / 1}
+.rg-fan-duo-right .rg-tile {aspect-ratio: 9 / 16}
+.rg-fan-duo-left .rg-tile img {
+  object-fit: cover;
+  object-position: center center;
+}
+.rg-fan-duo-right .rg-tile img {object-fit:cover}
 @media (max-width: 900px) {
-  .rg-first-landscape .rg-tile {width: min(950px, 82vw);}
+  .rg-fan-duo {grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr)}
 }
 @media (max-width: 600px) {
-  .rg-first-landscape {padding: 0 12px 75px;}
-  .rg-first-landscape .rg-tile {width: calc(100vw - 24px);}
+  .rg-fan-duo {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 40px 14px 92px;
+  }
+  .rg-fan-duo-left,
+  .rg-fan-duo-right {padding-top:0}
+  .rg-fan-duo-left .rg-tile {aspect-ratio: 1.22 / 1}
+  .rg-fan-duo-right .rg-tile {
+    width: min(75vw, 440px);
+    margin: 0 auto;
+  }
 }
