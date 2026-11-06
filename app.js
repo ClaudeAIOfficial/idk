@@ -3,8 +3,10 @@ const screenshots = [{"name":"Jason_and_Lucia_14_Mobile.17zv0lmevzbgs.jpg","labe
 const media="https://www.rockstargames.com/VI/_next/static/media/";
 const photos=screenshots.map((p,i)=>({id:i,label:p.label,url:"assets/gallery/"+String(i).padStart(2,"0")+".jpg",remote:p.remote}));
 // Newest addition: user-supplied beach club scene (no visible label or badge).
+// Community artwork, shown as the first gallery image after the hero.
+photos.push({id:39,label:"Nightclub DJ fan art",url:"assets/gallery/nightclub-dj-fan.png",remote:"https://d2ol7oe51mr4n9.cloudfront.net/user_3DFeZk0LqgiFcue7STVOyiCo13m/41c82fb4-cf1c-4df4-a6d1-f4b4e2db5e70.png"});
 const plans=[
-{theme:0,kind:"first-collage",left:[[1,"square"],[2,"square"]],right:[[3,"portrait"]],focus:4},
+{theme:0,firstPortrait:39,kind:"first-collage",left:[[1,"square"],[2,"square"]],right:[[3,"portrait"]],focus:4},
 {theme:1,full:5,kind:"offset-collage",left:[[6,"square"],[7,"portrait"]],right:[[8,"square"]],focus:9},
 {theme:2,full:10,kind:"right-narrow",left:[[11,"square"],[12,"landscape"]],right:[[13,"square"],[14,"portrait"]],focus:15},
 {theme:3,full:16,kind:"two-tall",left:[[17,"portrait"]],right:[[18,"square"],[19,"square"]],twins:[20,21],focus:22},
@@ -34,6 +36,12 @@ function column(items,side){
 for(const p of plans){
  const section=document.createElement("section");
  section.className="rg-series tone-"+p.theme+(p.last?" rg-last":"");
+ if (p.firstPortrait !== undefined) {
+  const first = document.createElement("div");
+  first.className = "rg-first-portrait";
+  first.append(photo(p.firstPortrait, "portrait"));
+  section.append(first);
+ }
  if(p.full!==undefined){
   const full=document.createElement("div");full.className="rg-wide";full.append(photo(p.full));section.append(full);
  }
