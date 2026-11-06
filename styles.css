@@ -1019,3 +1019,53 @@ html.glide-active, html.lenis {scroll-behavior:auto !important}
   .rg-rating-extra {padding-top: 12px;}
   .rg-fan-note {margin-top: 66px;font-size: 10px;}
 }
+
+
+/* Unofficial gallery branding and the new first portrait artwork. */
+.rg-header .rg-fan-label {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-left: 15px;
+  padding: 6px 9px;
+  border: 1px solid rgba(209,251,232,.5);
+  border-radius: 4px;
+  background: rgba(13,19,39,.7);
+  color: #c9f7e4;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  line-height: 1;
+}
+.rg-first-portrait {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(45px, 7vw, 110px) 20px clamp(100px, 10vw, 170px);
+}
+.rg-first-portrait .rg-tile {
+  display: block;
+  flex: 0 0 auto;
+  width: min(570px, 41vw);
+  aspect-ratio: 9 / 16;
+  border: 1px solid rgba(209,214,212,.65);
+  margin: 0 auto;
+}
+.rg-first-portrait .rg-tile img {object-fit: cover;}
+@media (max-width: 900px) {
+  .rg-header .rg-fan-label {font-size: 10px;margin-left: 10px;padding: 5px 6px;}
+  .rg-first-portrait .rg-tile {width: min(510px, 63vw);}
+}
+@media (max-width: 600px) {
+  .rg-header .rg-fan-label {
+    position: absolute;
+    top: 68px;
+    left: 18px;
+    margin-left: 0;
+    font-size: 9px;
+    padding: 5px 7px;
+  }
+  .rg-first-portrait {padding: 38px 12px 70px;}
+  .rg-first-portrait .rg-tile {width: min(88vw, 430px);}
+}
